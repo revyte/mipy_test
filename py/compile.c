@@ -2951,11 +2951,13 @@ STATIC void compile_scope(compiler_t *comp, scope_t *scope, pass_kind_t pass) {
 
     // compile
     if (MP_PARSE_NODE_IS_STRUCT_KIND(scope->pn, PN_eval_input)) {
+    	printf("compile_scope::SCOPE_MODULE1\n\r");
         assert(scope->kind == SCOPE_MODULE);
         mp_parse_node_struct_t *pns = (mp_parse_node_struct_t*)scope->pn;
         compile_node(comp, pns->nodes[0]); // compile the expression
         EMIT(return_value);
     } else if (scope->kind == SCOPE_MODULE) {
+    	printf("compile_scope::SCOPE_MODULE\n\r");
         if (!comp->is_repl) {
             check_for_doc_string(comp, scope->pn);
         }
@@ -2963,6 +2965,7 @@ STATIC void compile_scope(compiler_t *comp, scope_t *scope, pass_kind_t pass) {
         EMIT_ARG(load_const_tok, MP_TOKEN_KW_NONE);
         EMIT(return_value);
     } else if (scope->kind == SCOPE_FUNCTION) {
+    	printf("compile_scope::SCOPE_FUNCTION\n\r");
         assert(MP_PARSE_NODE_IS_STRUCT(scope->pn));
         mp_parse_node_struct_t *pns = (mp_parse_node_struct_t*)scope->pn;
         assert(MP_PARSE_NODE_STRUCT_KIND(pns) == PN_funcdef);
@@ -3002,6 +3005,7 @@ STATIC void compile_scope(compiler_t *comp, scope_t *scope, pass_kind_t pass) {
             EMIT(return_value);
         }
     } else if (scope->kind == SCOPE_LAMBDA) {
+    	printf("compile_scope::SCOPE_LAMBDA\n\r");
         assert(MP_PARSE_NODE_IS_STRUCT(scope->pn));
         mp_parse_node_struct_t *pns = (mp_parse_node_struct_t*)scope->pn;
         assert(MP_PARSE_NODE_STRUCT_NUM_NODES(pns) == 3);
@@ -3023,6 +3027,7 @@ STATIC void compile_scope(compiler_t *comp, scope_t *scope, pass_kind_t pass) {
         EMIT(return_value);
     } else if (scope->kind == SCOPE_LIST_COMP || scope->kind == SCOPE_DICT_COMP || scope->kind == SCOPE_SET_COMP || scope->kind == SCOPE_GEN_EXPR) {
         // a bit of a hack at the moment
+    	printf("compile_scope::hack\n\r");
 
         assert(MP_PARSE_NODE_IS_STRUCT(scope->pn));
         mp_parse_node_struct_t *pns = (mp_parse_node_struct_t*)scope->pn;

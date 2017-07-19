@@ -58,7 +58,7 @@
 #define RULE_ARG_OPT_RULE       (0x3000)
 
 // (un)comment to use rule names; for debugging
-//#define USE_RULE_NAME (1)
+#define USE_RULE_NAME (1)
 
 typedef struct _rule_t {
     byte rule_id;
@@ -783,12 +783,12 @@ mp_parse_tree_t mp_parse(mp_lexer_t *lex, mp_parse_input_kind_t input_kind) {
 
         /*
         // debugging
-        printf("depth=%d ", parser.rule_stack_top);
+        printf("depth=%d ", (int)parser.rule_stack_top);
         for (int j = 0; j < parser.rule_stack_top; ++j) {
             printf(" ");
         }
-        printf("%s n=%d i=%d bt=%d\n", rule->rule_name, n, i, backtrack);
-        */
+        printf("%s n=%d i=%d bt=%d\n", rule->rule_name, (int)n, (int)i, backtrack);
+		*/
 
         switch (rule->act & RULE_ACT_KIND_MASK) {
             case RULE_ACT_OR:

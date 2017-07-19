@@ -374,6 +374,16 @@ void mp_raw_code_save(mp_raw_code_t *rc, mp_print_t *print) {
 
 #if defined(__i386__) || defined(__x86_64__) || (defined(__arm__) && (defined(__unix__)))
 
+//#if defined(__i386__)
+//#warning "i386"
+//#endif
+//#if defined(__x86_64__)
+//#warning "x86_64"
+//#endif
+//#if defined(__arm__) && (defined(__unix__))
+//#warning "arm&unix"
+//#endif
+
 #include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>

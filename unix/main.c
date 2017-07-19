@@ -128,9 +128,11 @@ STATIC int execute_from_lexer(int source_kind, const void *source, mp_parse_inpu
 
         mp_parse_tree_t parse_tree = mp_parse(lex, input_kind);
 
-        #if defined(MICROPY_UNIX_COVERAGE)
+//        #if defined(MICROPY_UNIX_COVERAGE)
+	#if 1
         // allow to print the parse tree in the coverage build
-        if (mp_verbose_flag >= 3) {
+	if (1){        
+	//if (mp_verbose_flag >= 3) {
             printf("----------------\n");
             mp_parse_node_print(parse_tree.root, 0);
             printf("----------------\n");
@@ -264,6 +266,7 @@ STATIC int do_repl(void) {
     #else
 
     // use simple readline
+    prompt("use simple readline");
 
     for (;;) {
         char *line = prompt(">>> ");
